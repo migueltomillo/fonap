@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2022 a las 04:00:37
+-- Tiempo de generación: 19-10-2022 a las 23:18:15
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 7.4.29
 
@@ -35,15 +35,17 @@ CREATE TABLE `actividades` (
   `evidencia` text NOT NULL,
   `sesion` int(11) NOT NULL,
   `programa` int(11) NOT NULL,
-  `modalidad` text NOT NULL
+  `modalidad` int(11) NOT NULL,
+  `act_estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `actividades`
 --
 
-INSERT INTO `actividades` (`id`, `codigo`, `tema`, `fecha`, `evidencia`, `sesion`, `programa`, `modalidad`) VALUES
-(3, 'f321f', 'actividad', '2022-09-03', '2', 1, 3, 'Virtual');
+INSERT INTO `actividades` (`id`, `codigo`, `tema`, `fecha`, `evidencia`, `sesion`, `programa`, `modalidad`, `act_estado`) VALUES
+(3, 'f321f', 'actividad', '2022-09-03', 'evidencia 2', 1, 3, 1, 1),
+(7, 'ce432r', 'juego', '2022-08-10', 'evidencia 1', 3, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -68,6 +70,17 @@ CREATE TABLE `localidad` (
   `village` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `localidad`
+--
+
+INSERT INTO `localidad` (`id`, `nombre`, `village`) VALUES
+(1, 'La magdalena', 2),
+(2, 'La mena', 2),
+(3, 'Solanda', 2),
+(4, 'San bartolo', 2),
+(5, 'Villaflora', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -78,6 +91,14 @@ CREATE TABLE `modalidad` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `modalidad`
+--
+
+INSERT INTO `modalidad` (`id`, `nombre`) VALUES
+(1, 'Individual'),
+(2, 'Grupal');
 
 -- --------------------------------------------------------
 
@@ -90,6 +111,17 @@ CREATE TABLE `pais_patrocinador` (
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `pais_patrocinador`
+--
+
+INSERT INTO `pais_patrocinador` (`id`, `nombre`) VALUES
+(1, 'Colombia'),
+(2, 'Ecuador\r\n'),
+(3, 'Estados Unidos'),
+(4, 'España'),
+(5, 'Mexico');
+
 -- --------------------------------------------------------
 
 --
@@ -99,33 +131,26 @@ CREATE TABLE `pais_patrocinador` (
 CREATE TABLE `participantes` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL,
+  `apellido` text NOT NULL,
   `genero` text NOT NULL,
   `fechaNacimiento` date NOT NULL,
   `edad` int(11) NOT NULL,
   `village` int(11) NOT NULL,
   `localidad` int(11) NOT NULL,
-  `pais` text NOT NULL,
+  `pais` int(11) NOT NULL,
   `programa` int(11) NOT NULL,
   `estado` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `part_estado` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `participantes`
 --
 
-INSERT INTO `participantes` (`id`, `nombre`, `genero`, `fechaNacimiento`, `edad`, `village`, `localidad`, `pais`, `programa`, `estado`, `fecha`) VALUES
-(26, 'Julia ', 'F', '2022-09-02', 3, 1, 2, 'Ecuador', 1, 2, '2022-09-03 01:59:13'),
-(28, 'María', 'M', '2011-01-07', 3, 2, 2, 'Estados Unidos', 3, 3, '2022-09-03 02:01:23'),
-(29, 'Naire', 'M', '2011-06-02', 12, 2, 2, 'España', 2, 3, '2022-09-03 02:11:36'),
-(30, 'José m', 'M', '2011-07-03', 10, 2, 0, 'Ecuador', 2, 0, '2022-09-04 06:52:36'),
-(31, 'Mauricio', 'M', '2022-09-03', 7, 1, 2, 'Estados Unidos', 1, 1, '2022-09-04 06:53:13'),
-(32, 'María jose', 'M', '0000-00-00', 7, 1, 2, 'Estados Unidos', 1, 1, '2022-09-04 06:53:36'),
-(33, 'María jose', 'F', '0000-00-00', 7, 2, 2, 'España', 2, 1, '2022-09-04 06:54:00'),
-(34, 'Pablo Ortiz', 'M', '2010-03-03', 7, 2, 2, 'Mexico', 2, 1, '2022-09-04 06:54:31'),
-(35, 'José Mayque', 'M', '2007-06-03', 7, 1, 2, 'Estados Unidos', 2, 0, '2022-09-04 06:55:16'),
-(36, 'Pedro Alvarez', 'M', '2008-02-03', 7, 1, 2, 'Estados Unidos', 2, 1, '2022-09-04 06:55:59'),
-(37, 'Marta Vaia', 'M', '2006-02-03', 7, 2, 2, 'Estados Unidos', 3, 1, '2022-09-04 06:56:40');
+INSERT INTO `participantes` (`id`, `nombre`, `apellido`, `genero`, `fechaNacimiento`, `edad`, `village`, `localidad`, `pais`, `programa`, `estado`, `fecha`, `part_estado`) VALUES
+(45, 'Juliana Rodriguez', 'Ortiz Casqui', 'F', '2002-01-19', 20, 1, 2, 2, 1, 1, '2022-10-20 02:14:26', 1),
+(46, 'Pedro', 'Jav', 'F', '2005-01-07', 17, 2, 4, 3, 2, 3, '2022-10-20 01:40:01', 1);
 
 -- --------------------------------------------------------
 
@@ -140,6 +165,15 @@ CREATE TABLE `programa` (
   `edadLimite` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `programa`
+--
+
+INSERT INTO `programa` (`id`, `nombre`, `edadMinima`, `edadLimite`) VALUES
+(1, 'Programa 1', 3, 20),
+(2, 'Programa 2', 3, 20),
+(3, 'Programa 3', 3, 20);
+
 -- --------------------------------------------------------
 
 --
@@ -151,6 +185,15 @@ CREATE TABLE `sesion` (
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `sesion`
+--
+
+INSERT INTO `sesion` (`id`, `nombre`) VALUES
+(1, 'Meet'),
+(2, 'Zoom'),
+(3, 'Jitsi');
+
 -- --------------------------------------------------------
 
 --
@@ -161,6 +204,15 @@ CREATE TABLE `village` (
   `id` int(11) NOT NULL,
   `nombre` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `village`
+--
+
+INSERT INTO `village` (`id`, `nombre`) VALUES
+(1, 'Centro'),
+(2, 'Sur'),
+(3, 'Norte');
 
 --
 -- Índices para tablas volcadas
@@ -228,7 +280,7 @@ ALTER TABLE `village`
 -- AUTO_INCREMENT de la tabla `actividades`
 --
 ALTER TABLE `actividades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `estado_participante`
@@ -240,43 +292,43 @@ ALTER TABLE `estado_participante`
 -- AUTO_INCREMENT de la tabla `localidad`
 --
 ALTER TABLE `localidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `modalidad`
 --
 ALTER TABLE `modalidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pais_patrocinador`
 --
 ALTER TABLE `pais_patrocinador`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `participantes`
 --
 ALTER TABLE `participantes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT de la tabla `programa`
 --
 ALTER TABLE `programa`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `sesion`
 --
 ALTER TABLE `sesion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `village`
 --
 ALTER TABLE `village`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

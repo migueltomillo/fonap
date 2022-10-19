@@ -6,7 +6,7 @@ class ModeloParticipantes{
 
 	static public function mdlMostrarParticipantes(){
 
-		$stmt = Conexion::conectar()-> prepare("SELECT id,nombre,genero, fechaNacimiento, edad, village, localidad,  pais ,programa ,estado,'X' as acciones FROM participantes");
+		$stmt = Conexion::conectar()-> prepare("SELECT id,nombre,apellido,genero, fechaNacimiento, edad, village, localidad,  pais ,programa ,estado,'X' as acciones FROM participantes  WHERE part_estado=1");
 
 		$stmt -> execute();
 
@@ -15,11 +15,12 @@ class ModeloParticipantes{
 		$stmt = null;
 	}
 
-	static public function mdlRegistrarParticipantes($nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
+	static public function mdlRegistrarParticipantes($nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
 
-		$stmt = Conexion::conectar()->prepare("INSERT INTO participantes(nombre,genero,fechaNacimiento,edad,village,localidad,pais,programa,estado,fecha) VALUES (:nombre,:genero,:fechaNacimiento,:edad,:village,:localidad,:pais,:programa,:estado,:fecha)");
+		$stmt = Conexion::conectar()->prepare("INSERT INTO participantes(nombre,apellido,genero,fechaNacimiento,edad,village,localidad,pais,programa,estado,fecha) VALUES (:nombre,:apellido,:genero,:fechaNacimiento,:edad,:village,:localidad,:pais,:programa,:estado,:fecha)");
 
 		$stmt -> bindParam(":nombre", $nombre, PDO::PARAM_STR);
+		$stmt -> bindParam(":apellido", $apellido, PDO::PARAM_STR);
 		$stmt -> bindParam(":genero", $genero, PDO::PARAM_STR);
 		$stmt -> bindParam(":fechaNacimiento", $fechaNacimiento, PDO::PARAM_STR);
 		$stmt -> bindParam(":edad", $edad, PDO::PARAM_STR);
@@ -41,7 +42,7 @@ class ModeloParticipantes{
 
 	static public function mdlEliminarParticipante($id){
 
-		$stmt = Conexion::conectar()->prepare("DELETE FROM participantes WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE participantes SET part_estado = 0 WHERE id = :id");
 
 		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
 
@@ -55,10 +56,11 @@ class ModeloParticipantes{
 
 	}
 
-	static public function mdlActualizarParticipante($id,$nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
+	static public function mdlActualizarParticipante($id,$nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
 
 		$stmt = Conexion::conectar()->prepare("UPDATE participantes
 											   SET nombre = :nombre,
+											   apellido = :apellido,
 											   genero = :genero,
 											   fechaNacimiento = :fechaNacimiento,
 											   edad = :edad,
@@ -72,6 +74,7 @@ class ModeloParticipantes{
 
 		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
 		$stmt -> bindParam(":nombre", $nombre, PDO::PARAM_STR);
+		$stmt -> bindParam(":apellido", $apellido, PDO::PARAM_STR);
 		$stmt -> bindParam(":genero", $genero, PDO::PARAM_STR);
 		$stmt -> bindParam(":fechaNacimiento", $fechaNacimiento, PDO::PARAM_STR);
 		$stmt -> bindParam(":edad", $edad, PDO::PARAM_STR);

@@ -7,6 +7,7 @@ class ajaxParticipantes{
 
 	public $id;
 	public $nombre;
+	public $apellido;
 	public $genero;
 	public $fechaNacimiento;
 	public $edad;
@@ -28,6 +29,7 @@ class ajaxParticipantes{
 		
 		$respuesta = ControladorParticipantes::ctrRegistrarParticipantes(
 		$this->nombre,
+		$this->apellido,
 		 $this->genero,
 		 $this->fechaNacimiento,
 		 $this->edad,
@@ -53,6 +55,7 @@ class ajaxParticipantes{
 		$respuesta = ControladorParticipantes::ctrActualizarParticipante(
 		$this->id,	
 		$this->nombre,
+		$this->apellido,
 		$this->genero,
 		$this->fechaNacimiento,
 		$this->edad,
@@ -76,6 +79,7 @@ if(!isset($_POST["accion"])){
 	if($_POST["accion"] == "registrar"){
 		$insertar = new ajaxParticipantes();
 		$insertar->nombre = $_POST["nombre"];
+		$insertar->apellido = $_POST["apellido"];
 		$insertar->genero = $_POST["genero"];
 		$insertar->fechaNacimiento = $_POST["fechaNacimiento"];
 		$insertar->edad = $_POST["edad"];
@@ -101,6 +105,7 @@ if(!isset($_POST["accion"])){
 
 		$actualizar->id = $_POST["id"];
 		$actualizar->nombre = $_POST["nombre"];
+		$actualizar->apellido = $_POST["apellido"];
 		$actualizar->genero = $_POST["genero"];
 		$actualizar->fechaNacimiento = $_POST["fechaNacimiento"];
 		$actualizar->edad = $_POST["edad"];

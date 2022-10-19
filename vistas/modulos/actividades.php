@@ -37,13 +37,13 @@
         <table id="tablaActividades" class="table table-striped table-bordered nowrap" style="width:100%;">
             <thead class="bg-info">
                 <tr>
-                    <td style="width:10%;">codigo</td>
-                    <td style="width:10%;">tema</td>
-                    <td style="width:10%;">fecha</td>
-                    <td style="width:10%;">evidencia</td>
-                    <td style="width:10%;">programa</td>
-                    <td style="width:5%;">sesion</td>
-                    <td style="width:10%;">modalidad</td>
+                    <td style="width:10%;">Codigo</td>
+                    <td style="width:10%;">Tema</td>
+                    <td style="width:10%;">Fecha</td>
+                    <td style="width:10%;">Link evidencia</td>
+                    <td style="width:10%;">Programa</td>
+                    <td style="width:5%;">Sesion</td>
+                    <td style="width:10%;">Modalidad</td>
                     <td style="width:5%;">Acciones</td>
                 </tr>
             </thead>
@@ -106,16 +106,24 @@
                         </div>
                    </div>
                      
-                     <div class="col-sm-4">
+                   <div class="col-sm-4">
                         <div class="form-group">
                             <label for="txtSesion">Sesion</label>
-                            <input type="number" class="form-control" name="sesion" id="txtSesion" placeholder="Ingrese la sesion">
+                            <select name="sesion" id="txtSesion" class="form-control select2bs4">
+                            <option value="1">Meet</option>
+                                <option value="2">Zoom</option>
+                                <option value="3">Jitsi</option>
+                            </select>
                         </div>
                    </div>
                    <div class="col-sm-4">
                         <div class="form-group">
                             <label for="txtPrograma">Programa</label>
-                            <input type="number" class="form-control" name="programa" id="txtPrograma" placeholder="Ingrese el programa">
+                            <select name="programa" id="txtPrograma" class="form-control select2bs4">
+                            <option value="1">Programa 1</option>
+                                <option value="2">Programa 2</option>
+                                <option value="3">Programa 3</option>
+                            </select>
                         </div>
                    </div>
                     
@@ -123,8 +131,8 @@
                         <div class="form-group">
                             <label for="txtModalidad">Modalidad</label>
                             <select name="modalidad" id="txtModalidad" class="form-control select2bs4">
-                                <option >Presencial</option>
-                                <option >Virtual</option>
+                            <option value="1">Individual</option>
+                                <option value="2">Grupal</option>
                                
                             </select>
                         </div>
@@ -168,7 +176,58 @@
 				"dataSrc":""
 			},  			
             "columnDefs":[ 
-	            
+                {
+	            		"targets": 4,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div >Programa 1</div> " 
+	            			}
+                            if(data == 2){
+								return "<div>Programa 2</div> " 
+	            			}
+                            if(data == 3){
+								return "<div>Programa 3</div> " 
+	            			}
+                          
+	            			
+	            		}
+	            	},
+                    {
+	            		"targets": 5,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div >Meet </div> " 
+	            			}
+                            if(data == 2){
+								return "<div> Zoom</div> " 
+	            			}
+                            if(data == 3){
+								return "<div> Jitsi</div> " 
+	            			}
+                          
+	            			
+	            		}
+	            	},
+                    {
+	            		"targets": 6,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div >Individual </div> " 
+	            			}
+                            if(data == 2){
+								return "<div> Grupal</div> " 
+	            			}
+                           
+                          
+	            			
+	            		}
+	            	},
             		{
 	            		"targets": 7,
 	            		"sortable": false,

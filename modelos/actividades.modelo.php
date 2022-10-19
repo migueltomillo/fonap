@@ -6,7 +6,7 @@ class ModeloActividades{
 
 	static public function mdlMostrarActividades(){
 
-		$stmt = Conexion::conectar()-> prepare("SELECT id,codigo,tema,fecha,evidencia,sesion,programa,modalidad,'X' as acciones FROM actividades");
+		$stmt = Conexion::conectar()-> prepare("SELECT id,codigo,tema,fecha,evidencia,sesion,programa,modalidad,'X' as acciones FROM actividades WHERE act_estado=1");
 
 		$stmt -> execute();
 
@@ -38,7 +38,7 @@ class ModeloActividades{
 
 	static public function mdlEliminarActividad($id){
 
-		$stmt = Conexion::conectar()->prepare("DELETE FROM actividades WHERE id = :id");
+		$stmt = Conexion::conectar()->prepare("UPDATE actividades SET act_estado = 0 WHERE id = :id");
 
 		$stmt -> bindParam(":id", $id, PDO::PARAM_INT);
 

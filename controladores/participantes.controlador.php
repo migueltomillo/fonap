@@ -9,9 +9,9 @@ class ControladorParticipantes{
 		return $respuesta;
 	}
 
-	static public function ctrRegistrarParticipantes($nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
+	static public function ctrRegistrarParticipantes($nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
 
-		$respuesta = ModeloParticipantes::mdlRegistrarParticipantes($nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha);
+		$respuesta = ModeloParticipantes::mdlRegistrarParticipantes($nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha);
 
 		return $respuesta;
 	}
@@ -23,9 +23,9 @@ class ControladorParticipantes{
 		return $respuesta;
 	}
 
-	static public function ctrActualizarParticipante($id,$nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
+	static public function ctrActualizarParticipante($id,$nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha){
 
-		$respuesta = ModeloParticipantes::mdlActualizarParticipante($id,$nombre,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha);
+		$respuesta = ModeloParticipantes::mdlActualizarParticipante($id,$nombre,$apellido,$genero, $fechaNacimiento, $edad, $village, $localidad,  $pais ,$programa ,$estado, $fecha);
 
 		return $respuesta;
 	}

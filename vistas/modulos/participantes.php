@@ -38,13 +38,14 @@
             <thead class="bg-info">
                 <tr>
                     <td>Nombre</td>
-                    <td style="width:10%;">genero</td>
-                    <td style="width:10%;">cumple</td>
-                    <td style="width:10%;">edad</td>
-                    <td style="width:10%;">village</td>
-                    <td style="width:10%;">localidad</td>
-                    <td style="width:5%;">pais</td>
-                    <td style="width:5%;">programa</td>
+                    <td>Apellido</td>
+                    <td style="width:5%;">Genero</td>
+                    <td style="width:7%;">Fecha de nacimiento</td>
+                    <td style="width:5%;">Edad</td>
+                    <td style="width:5%;">Village</td>
+                    <td style="width:6%;">Localidad</td>
+                    <td style="width:5%;">Pais</td>
+                    <td style="width:5%;">Programa</td>
                     <td style="width:10%;">Estado</td>
                     <td style="width:5%;">Acciones</td>
                 </tr>
@@ -89,6 +90,12 @@
                    </div>
                    <div class="col-sm-4">
                         <div class="form-group">
+                            <label for="txtApellido">Apellido</label>
+                            <input type="text" class="form-control" name="apellido" id="txtApellido" placeholder="Ingrese el apellido">
+                        </div>
+                   </div>
+                   <div class="col-sm-4">
+                        <div class="form-group">
                             <label for="txtGenero">Genero</label>
                             <select name="genero" id="txtGenero" class="form-control select2bs4">
                                 <option >M</option>
@@ -99,7 +106,7 @@
 
                    <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="txtFechaNacimiento">Fecha de cumple</label>
+                            <label for="txtFechaNacimiento">Fecha de nacimiento</label>
                             <input type="date" class="form-control" name="fechaNacimiento" id="txtFechaNacimiento" >
                         </div>
                    </div>
@@ -115,22 +122,23 @@
                         <div class="form-group">
                             <label for="txtVillage">Village</label>
                             <select name="village" id="txtVillage" class="form-control select2bs4">
-                                <option >0</option>
-                                <option >1</option>
-                                <option >2</option>
-                                <option >3</option>
+                            <option value="1">Centro</option>
+                                <option value="2">Sur</option>
+                                <option value="3">Norte</option>
                             </select>
                         </div>
                    </div>
 
                    <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="txtPrograma">Localidad</label>
+                            <label for="txtLocalidad">Localidad</label>
                             <select name="localidad" id="txtLocalidad" class="form-control select2bs4">
-                                <option >0</option>
-                                <option >1</option>
-                                <option >2</option>
-                                <option >3</option>
+                            <option value="1">La magdalena</option>
+                                <option value="2">La mena</option>
+                                <option value="3">Solanda</option>
+                                <option value="4">San bartolo</option>
+                                <option value="5">Villaflora</option>
+
                             </select>
                         </div>
                    </div>
@@ -139,10 +147,11 @@
                         <div class="form-group">
                             <label for="txtPais">Pais patrocinador</label>
                             <select name="pais" id="txtPais" class="form-control select2bs4">
-                                <option >Ecuador</option>
-                                <option >Estados Unidos</option>
-                                <option >España</option>
-                                <option >Mexico</option>
+                            <option value="1">Colombia</option>   
+                            <option value="2">Ecuador</option>
+                                <option value="3">Estados Unidos</option>
+                                <option value="4">España</option>
+                                <option value="5">Mexico</option>
                             </select>
                         </div>
                    </div>
@@ -150,10 +159,9 @@
                         <div class="form-group">
                             <label for="txtPrograma">Programa</label>
                             <select name="programa" id="txtPrograma" class="form-control select2bs4">
-                                <option >0</option>
-                                <option >1</option>
-                                <option >2</option>
-                                <option >3</option>
+                            <option value="1">Programa 1</option>
+                                <option value="2">Programa 2</option>
+                                <option value="3">Programa 3</option>
                             </select>
                         </div>
                    </div>
@@ -161,10 +169,10 @@
                         <div class="form-group">
                             <label for="ddlEstado">Estado</label>
                             <select name="estado" id="ddlEstado" class="form-control select2bs4">
-                                <option value="0">Comunitario</option>
-                                <option value="1">On Hold</option>
-                                <option value="2">Reinstateable</option>
-                                <option value="3">Sponsored</option>
+                                <option value="1">Comunitario</option>
+                                <option value="2">On Hold</option>
+                                <option value="3">Reinstateable</option>
+                                <option value="4">Sponsored</option>
                             </select>
                         </div>
                    </div>
@@ -205,28 +213,111 @@
 				"dataSrc":""
 			},  			
             "columnDefs":[ 
-	            	{
+                {
+	            		"targets": 5,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div >Centro</div> " 
+	            			}
+                            if(data == 2){
+								return "<div>Sur</div> " 
+	            			}
+                            if(data == 3){
+								return "<div>Norte</div> " 
+	            			}
+                          
+	            			
+	            		}
+	            	},
+
+                    {
+	            		"targets": 6,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div >La magdalena</div> " 
+	            			}
+                            if(data == 2){
+								return "<div>La mena</div> " 
+	            			}
+                            if(data == 3){
+								return "<div>Solanda</div> " 
+	            			}
+                            if(data == 4){
+								return "<div>San bartolo</div> " 
+	            			}
+                            if(data == 5){
+								return "<div>Villaflora</div> " 
+	            			}
+                          
+	            			
+	            		}
+	            	}, 
+                    {
+	            		"targets": 7,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+                            if(data == 1){
+								return "<div> Colombia</div> " 
+	            			}
+	            			if(data == 2){
+								return "<div > Ecuador</div> " 
+	            			}
+                            if(data == 3){
+								return "<div> Estados Unidos</div> " 
+	            			}
+                            if(data == 4){
+								return "<div> España</div> " 
+	            			}
+                            if(data == 5){
+								return "<div>Mexico</div> " 
+	            			}
+	            			
+	            		}
+	            	},
+                {
 	            		"targets": 8,
 	            		"sortable": false,
 	            		"render": function (data, type, full, meta){
 
-	            			if(data == 0){
-								return "<div class='bg-primary color-palette text-center'>Comunitario</div> " 
-	            			}
-                            if(data == 1){
-								return "<div class='bg-secondary color-palette text-center'>On Hold</div> " 
+	            			if(data == 1){
+								return "<div >Programa 1</div> " 
 	            			}
                             if(data == 2){
-								return "<div class='bg-warning color-palette text-center'>Reinstateable</div> " 
+								return "<div>Programa 2</div> " 
 	            			}
                             if(data == 3){
+								return "<div>Programa 3</div> " 
+	            			}
+                          
+	            			
+	            		}
+	            	},
+	            	{
+	            		"targets": 9,
+	            		"sortable": false,
+	            		"render": function (data, type, full, meta){
+
+	            			if(data == 1){
+								return "<div class='bg-primary color-palette text-center'>Comunitario</div> " 
+	            			}
+                            if(data == 2){
+								return "<div class='bg-secondary color-palette text-center'>On Hold</div> " 
+	            			}
+                            if(data == 3){
+								return "<div class='bg-warning color-palette text-center'>Reinstateable</div> " 
+	            			}
+                            if(data == 4){
 								return "<div class='bg-success color-palette text-center'>Sponsored</div> " 
 	            			}
 	            			
 	            		}
 	            	},
             		{
-	            		"targets": 9,
+	            		"targets": 10,
 	            		"sortable": false,
 	            		"render": function (data, type, full, meta){
 	            			return "<center>" +
@@ -242,6 +333,7 @@
             	],
             "columns":[
                     {"data": "nombre"},
+                    {"data": "apellido"},
                     {"data": "genero"},
                     {"data": "fechaNacimiento"},
                     {"data": "edad"},
@@ -496,6 +588,7 @@
 
             $("#idParticipante").val(data["id"])
             $("#txtNombre").val(data["nombre"]);
+            $("#txtApellido").val(data["apellido"]);
             $("#txtGenero").val(data["genero"]);
             $("#txtFechaNacimiento").val(data["fechaNacimiento"]);
             $("#txtEdad").val(data["edad"]);
@@ -514,6 +607,7 @@
 
             var id = $("#idParticipante").val(),
                 nombre = $("#txtNombre").val(),
+                apellido = $("#txtApellido").val(),
                 genero = $("#txtGenero").val(),
                 fechaNacimiento = $("#txtFechaNacimiento").val(),
                 edad = $("#txtEdad").val(),
@@ -528,6 +622,7 @@
 
             datos.append('id',id)
             datos.append('nombre',nombre)
+            datos.append('apellido',apellido)
             datos.append('genero',genero)
             datos.append('fechaNacimiento',fechaNacimiento)
             datos.append('edad',edad)
@@ -569,6 +664,7 @@
 
                             $("#idParticipante").val("");
                             $("#txtNombre").val("");
+                            $("#txtApellido").val("");
                             $("#txtGenero").val("");
                             $("#txtFechaNacimiento").val("");
                             $("#txtEdad").val("");
